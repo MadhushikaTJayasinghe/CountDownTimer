@@ -11,6 +11,8 @@ public class MainActivity extends AppCompatActivity {
   private boolean running;
   private boolean wasRunning;
   private static final String CURRENT_COUNTER  = "COUNTER";
+  private boolean WasRunning = false;
+  private boolean running = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         if(savedInstanceState != null){
             counter = savedInstanceState.getInt(CURRENT_COUNTER);
         }
+        running = true;
         CountDown();
     }
     @Override
@@ -39,13 +42,15 @@ public class MainActivity extends AppCompatActivity {
                if(counter == 0){
                    counter = 99;
            }
-
-
-
                     counter--;
                     handler.postDelayed(this,1000);
                 }
             });
+        }
+        @Override
+     public void onStop(){
+        super.onStop();
+        wasRunning = true;
         }
     }
 
